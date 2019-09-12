@@ -1,0 +1,53 @@
+<h3 align="center">Review's</h3>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="review">
+    <th mat-header-cell *matHeaderCellDef>Review</th>
+    <td mat-cell *matCellDef="let element"> {{element.body}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef>User</th>
+    <td mat-cell *matCellDef="let element"> {{element.user.fullname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef>Time</th>
+
+    <td mat-cell *matCellDef="let element"> {{element.createdAt | amLocal | amDateFormat: 'hh:mm DD-MM-YYYY'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="upVote">
+    <th mat-header-cell *matHeaderCellDef>up Vote</th>
+
+    <td mat-cell *matCellDef="let element">
+
+      {{element.upVote}}
+      <br>
+      <button mat-raised-button (click)="onVote(element._id,'up')">
+        <i class="material-icons">
+          thumb_up
+        </i>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="downVote">
+    <th mat-header-cell *matHeaderCellDef>down Vote</th>
+
+    <td mat-cell *matCellDef="let element">
+      {{element.downVote}}
+      <br>
+      <button mat-raised-button (click)="onVote(element._id,'down')">
+        <i class="material-icons">
+          thumb_down
+        </i>
+      </button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
